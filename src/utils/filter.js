@@ -25,4 +25,25 @@ const filterBooks = (books, shelfname) => {
   return bookshelf;
 };
 
-export { filterShelf, filterBooks };
+const filterBooksOnly = books => {
+  const bookshelf = [];
+  console.log(books);
+
+  for (const book of books) {
+    console.log(book);
+    if (book.imageLinks !== undefined) {
+      bookshelf.push({
+        id: book.id,
+        shelf: book.shelf,
+        authors: book.authors,
+        title: book.title,
+        subtitle: book.subtitle,
+        imageLinks: book.imageLinks.thumbnail
+      });
+    }
+  }
+
+  return bookshelf;
+};
+
+export { filterShelf, filterBooks, filterBooksOnly };

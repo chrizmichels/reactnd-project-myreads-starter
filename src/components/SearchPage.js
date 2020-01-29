@@ -2,26 +2,29 @@ import React, { Component } from "react";
 import "../App.css";
 import * as BooksAPI from "../utils/BooksAPI";
 import SearchInput from "./SearchInput";
-import { SearchResult } from "./SearchResult";
+import SearchResult from "./SearchResult";
 import { render } from "react-dom";
 
 class SearchPage extends Component {
   state = {
-    query: ""
+    query: "",
+    searchResult: []
   };
 
   searchBooks = query => {
-    BooksAPI.search(query).then(books => {
-      console.log("SEARCHRESULTS", books);
-    });
+    query === "" ||
+      BooksAPI.search(query).then(books => {
+        this.setState(() => ({
+          searchResult: books
+        }));
+      });
   };
 
   handleupdateQuery = query => {
     this.setState(() => ({
-      query: query.trim()
+      query: query.trim(),
+      searchResult: this.searchBooks(query)
     }));
-    console.log("SEARCHPAGE", this.state);
-    this.searchBooks(query);
   };
 
   clearQuery = () => {
@@ -33,7 +36,7 @@ class SearchPage extends Component {
     return (
       <div>
         <SearchInput onHandleUpdateQuery={this.handleupdateQuery} />
-        <SearchResult books={this.searchBooks(this.state)} />
+        <SearchResult state={this.state} />
       </div>
     );
   }

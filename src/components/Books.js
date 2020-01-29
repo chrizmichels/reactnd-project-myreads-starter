@@ -2,11 +2,10 @@ import React, { Component } from "react";
 // import * as BooksAPI from './BooksAPI'
 import "../App.css";
 import { bool } from "prop-types";
-import { Book } from "./Book";
+import Book from "./Book";
 
 export const Books = props => {
   const { books } = props;
-  console.log("Books", books);
 
   return (
     <div className="bookshelf-books">
@@ -17,6 +16,7 @@ export const Books = props => {
             title={book.title}
             author={book.authors}
             bookurl={book.imageLinks}
+            id={book.id}
           />
         ))}
       </ol>

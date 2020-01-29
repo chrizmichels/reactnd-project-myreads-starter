@@ -3,18 +3,24 @@ import React, { Component } from "react";
 import "../App.css";
 import { bool } from "prop-types";
 import { Books } from "./Books";
+import { filterBooksOnly } from "../utils/filter";
 
-export const SearchResult = props => {
-  const { books } = props;
-  return (
-    <div className="search-books-results">
-      <ol className="books-grid">
-        {books === undefined || 
-          <Books books={books} />
-        }
-      </ol>
-    </div>
-  );
-};
+class SearchResult extends Component {
+  render() {
+    const { state } = this.props;
+    const books = state.searchResult;
+    console.log(books);
 
-//export default SearchResult;
+    return (
+      <div className="search-books-results">
+        <ol className="books-grid">
+          {books !== undefined && books.length > 0 && (
+            <Books books={filterBooksOnly(books)} />
+          )}
+        </ol>
+      </div>
+    );
+  }
+}
+
+export default SearchResult;

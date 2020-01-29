@@ -29,10 +29,8 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      console.log(books);
       const bookshelf = filterShelf(books, readingShelfName);
       this.setState({ readingshelfs: bookshelf });
-      console.log("STATE with BOOKS", this.state.readingshelfs);
     });
   }
 

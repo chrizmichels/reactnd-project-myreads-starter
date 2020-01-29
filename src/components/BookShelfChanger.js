@@ -3,20 +3,30 @@ import React, { Component } from "react";
 import "../App.css";
 import { bool } from "prop-types";
 
-export const BookShelfChanger = props => {
-  return (
-    <div className="book-shelf-changer">
-      <select>
-        <option value="move" disabled>
-          Move to...
-        </option>
-        <option value="currentlyReading">Currently Reading</option>
-        <option value="wantToRead">Want to Read</option>
-        <option value="read">Read</option>
-        <option value="none">None</option>
-      </select>
-    </div>
-  );
-};
+class BookShelfChanger extends Component {
+  constructor(props) {
+    super(props);
+    this.handleupdate = this.handleupdate.bind(this);
+  }
 
-//export default BookShelfChanger;
+  handleupdate(e) {
+    this.props.onHandleUpdate(e.target.value);
+  }
+  render() {
+    return (
+      <div className="book-shelf-changer">
+        <select onChange={this.handleupdate}>
+          <option value="move" disabled>
+            Move to...
+          </option>
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
+          <option value="read">Read</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+    );
+  }
+}
+
+export default BookShelfChanger;
