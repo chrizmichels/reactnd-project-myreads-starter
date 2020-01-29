@@ -6,11 +6,18 @@ import { Book } from "./Book";
 
 export const Books = props => {
   const { books } = props;
+  console.log("Books", books);
+
   return (
     <div className="bookshelf-books">
       <ol className="books-grid">
         {books.map(book => (
-          <Book title={book.title} author={book.author} bookurl={book.url} />
+          <Book
+            key={book.id}
+            title={book.title}
+            author={book.authors}
+            bookurl={book.imageLinks}
+          />
         ))}
       </ol>
     </div>
