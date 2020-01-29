@@ -9,7 +9,9 @@ export const SearchResult = props => {
   return (
     <div className="search-books-results">
       <ol className="books-grid">
-        <Books books={books} />
+        {books.map(book => (
+          <Books books={book} />
+        ))}
       </ol>
     </div>
   );

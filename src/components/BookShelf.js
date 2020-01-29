@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "../App.css";
 import { bool } from "prop-types";
 import { ReadingShelf } from "./ReadingShelf";
+import { Link } from "react-router-dom";
 
 export const BookShelf = props => {
   const { readingShelfName, readingShelfContent } = props;
@@ -20,6 +21,11 @@ export const BookShelf = props => {
             shelfShortName={shelf.shortname}
           />
         ))}
+      </div>
+      <div className="open-search">
+        <Link to="Search">
+          <button>Add a book</button>
+        </Link>
       </div>
     </div>
   );
