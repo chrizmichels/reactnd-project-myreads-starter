@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import * as BooksAPI from "./utils/BooksAPI";
 import "./App.css";
 import { bool } from "prop-types";
-import { SearchResult } from "./components/SearchResult";
-import { SearchInput } from "./components/SearchInput";
 import { BookShelf } from "./components/BookShelf";
 import { Route } from "react-router-dom";
-import { filterShelf} from "./utils/filter";
+import { filterShelf } from "./utils/filter";
+import SearchPage from "./components/SearchPage";
 
 const readingShelfName = [
   {
@@ -25,12 +24,6 @@ const readingShelfName = [
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     readingshelfs: []
   };
 
@@ -51,8 +44,7 @@ class BooksApp extends React.Component {
           path="/Search"
           render={() => (
             <div>
-              <SearchInput />
-              <SearchResult books={this.state.readingshelfs} />
+              <SearchPage readingShelfs={this.state.readingshelfs} />
             </div>
           )}
         />

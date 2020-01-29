@@ -9,9 +9,9 @@ export const SearchResult = props => {
   return (
     <div className="search-books-results">
       <ol className="books-grid">
-        {books.map(book => (
-          <Books books={book} />
-        ))}
+        {books === undefined || 
+          <Books books={books} />
+        }
       </ol>
     </div>
   );
