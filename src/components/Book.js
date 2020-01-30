@@ -11,36 +11,43 @@ class Book extends Component {
     this.handleupdate = this.handleupdate.bind(this);
   }
 
-  state = {
-    shelf: "",
-    book: {}
-  };
+  state = {};
+
+  componentDidMount() {
+    const { title, author, bookurl, shelf, id } = this.props;
+
+    this.setState(() => ({
+      shelf: shelf,
+      id: id,
+      title: title,
+      author: author,
+      bookurl: bookurl
+    }));
+
+    //console.log("BOOKSTATE", this.state);
+  }
 
   handleupdate = shelf => {
     this.setState(() => ({
       shelf: shelf,
-      book: {
-        id: this.props.id,
-        title: this.props.title,
-        author: this.props.author
-      }
+      id: this.props.id,
+      title: this.props.title,
+      author: this.props.author
     }));
-    console.log("BOOK STATE", this.state);
-
-    this.moveBook(this.state.shelf, this.state.book);
+    this.moveBook(shelf, this.state);
   };
 
   moveBook = (book, shelf) => {
-    console.log("MOVE BOOK RESPONSE", book);
-    console.log("MOVE BOOK RESPONSE", shelf);
+    console.log("MOVE BOOK book", book);
+    console.log("MOVE BOOK shelf", shelf);
     shelf !== "" &&
       BooksAPI.update(book, shelf).then(response => {
-        console.log("MOVE BOOK RESPONSE", response);
+        console.log("Books API RESPONSE", response);
       });
   };
 
   render() {
-    const { title, author, bookurl} = this.props;
+    const { title, author, bookurl, shelf } = this.props;
 
     return (
       <li>
@@ -54,7 +61,10 @@ class Book extends Component {
                 backgroundImage: `url(${bookurl}?`
               }}
             ></div>
-            <BookShelfChanger onHandleUpdate={this.handleupdate} />
+            <BookShelfChanger
+              onHandleUpdate={this.handleupdate}
+              shelf={this.shelf}
+            />
           </div>
           <div className="book-title">{title}</div>
           <div className="book-authors">{author}</div>

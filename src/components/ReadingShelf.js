@@ -10,7 +10,7 @@ export const ReadingShelf = props => {
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{shelfTitle}</h2>
-      <Books books={books} key={shelfShortName} />
+      <Books books={books} shelf={shelfShortName} key={shelfShortName} />
     </div>
   );
 };

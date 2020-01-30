@@ -13,6 +13,8 @@ class BookShelfChanger extends Component {
     this.props.onHandleUpdate(e.target.value);
   }
   render() {
+    const shelf = this.props.shelf;
+    
     return (
       <div className="book-shelf-changer">
         <select onChange={this.handleupdate}>

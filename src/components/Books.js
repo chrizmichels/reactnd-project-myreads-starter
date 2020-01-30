@@ -17,6 +17,7 @@ export const Books = props => {
             author={book.authors}
             bookurl={book.imageLinks}
             id={book.id}
+            shelf={book.shelf}
           />
         ))}
       </ol>
