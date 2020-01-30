@@ -3,7 +3,7 @@ import "../App.css";
 import * as BooksAPI from "../utils/BooksAPI";
 import SearchInput from "./SearchInput";
 import SearchResult from "./SearchResult";
-import { render } from "react-dom";
+//import { render } from "react-dom";
 
 class SearchPage extends Component {
   state = {
@@ -32,7 +32,7 @@ class SearchPage extends Component {
   };
 
   render() {
-    const { readingShelfs } = this.props;
+
     return (
       <div>
         <SearchInput onHandleUpdateQuery={this.handleupdateQuery} />

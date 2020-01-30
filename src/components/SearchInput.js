@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "../App.css";
-import { bool } from "prop-types";
+//import { bool } from "prop-types";
 import { Link } from "react-router-dom";
 
 class SearchInput extends Component {

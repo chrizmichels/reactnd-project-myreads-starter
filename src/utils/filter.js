@@ -4,33 +4,36 @@ const filterShelf = (books, readingShelf) => {
     const bookshelf = filterBooks(books, shelfname.shortname);
     returnShelfes.push(bookshelf);
   }
+  //console.log("RETURN SHELFS", returnShelfes);
+
   return returnShelfes;
 };
 
 const filterBooks = (books, shelfname) => {
   const bookshelf = [];
+
   for (const book of books) {
     if (book.shelf === shelfname) {
-      bookshelf.push({
+      const objbook = {
         id: book.id,
         shelf: book.shelf,
         authors: book.authors,
         title: book.title,
         subtitle: book.subtitle,
         imageLinks: book.imageLinks.thumbnail
-      });
+      };
+      bookshelf.push(objbook);
     }
   }
-
   return bookshelf;
 };
 
 const filterBooksOnly = books => {
   const bookshelf = [];
-  console.log(books);
+  //console.log(books);
 
   for (const book of books) {
-    console.log(book);
+    //console.log(book);
     if (book.imageLinks !== undefined) {
       bookshelf.push({
         id: book.id,

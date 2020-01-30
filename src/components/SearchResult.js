@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import * as BooksAPI from './BooksAPI'
 import "../App.css";
-import { bool } from "prop-types";
+//import { bool } from "prop-types";
 import { Books } from "./Books";
 import { filterBooksOnly } from "../utils/filter";
 
@@ -9,7 +9,7 @@ class SearchResult extends Component {
   render() {
     const { state } = this.props;
     const books = state.searchResult;
-    console.log(books);
+    //console.log(books);
 
     return (
       <div className="search-books-results">

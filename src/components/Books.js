@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 // import * as BooksAPI from './BooksAPI'
 import "../App.css";
-import { bool } from "prop-types";
+//import { bool } from "prop-types";
 import Book from "./Book";
 
 export const Books = props => {

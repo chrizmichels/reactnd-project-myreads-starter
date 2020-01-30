@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 // import * as BooksAPI from './BooksAPI'
 import "../App.css";
-import { bool } from "prop-types";
+//import { bool } from "prop-types";
 import { ReadingShelf } from "./ReadingShelf";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export const BookShelf = props => {
         {readingShelfName.map(shelf => (
           <ReadingShelf
             key={`${shelf.title}`}
-            books={readingShelfContent}
+            books={readingShelfContent[shelf.shortname]}
             shelfTitle={shelf.title}
             shelfShortName={shelf.shortname}
           />

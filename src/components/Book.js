@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import * as BooksAPI from "../utils/BooksAPI";
 import "../App.css";
-import { bool } from "prop-types";
+//import { bool } from "prop-types";
 import BookShelfChanger from "./BookShelfChanger";
-import { render } from "react-dom";
+//import { render } from "react-dom";
 
 class Book extends Component {
   constructor(props) {
@@ -25,6 +25,8 @@ class Book extends Component {
         author: this.props.author
       }
     }));
+    console.log("BOOK STATE", this.state);
+
     this.moveBook(this.state.shelf, this.state.book);
   };
 
@@ -38,7 +40,7 @@ class Book extends Component {
   };
 
   render() {
-    const { title, author, bookurl, id } = this.props;
+    const { title, author, bookurl} = this.props;
 
     return (
       <li>
