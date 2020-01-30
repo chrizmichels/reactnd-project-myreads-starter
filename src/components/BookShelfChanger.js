@@ -15,8 +15,6 @@ class BookShelfChanger extends Component {
     this.setState({ value: e.target.value });
   }
   render() {
-    const shelf = this.props.shelf;
-
     return (
       <div className="book-shelf-changer">
         <select value={this.state.value} onChange={this.handleupdate}>

@@ -37,7 +37,7 @@ class Book extends Component {
     this.moveBook(shelf, this.state);
   };
 
-  moveBook = (book, shelf) => {
+  moveBook = (shelf, book) => {
     console.log("MOVE BOOK book", book);
     console.log("MOVE BOOK shelf", shelf);
     shelf !== "" &&

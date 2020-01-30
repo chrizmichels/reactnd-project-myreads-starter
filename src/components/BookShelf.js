@@ -34,20 +34,34 @@ class BookShelf extends Component {
     BooksAPI.getAll().then(books => {
       console.log(books);
       const bookshelf = filterShelf(books, this.state.shelfs);
-      console.log(bookshelf);
+      console.log("BOOKSHELF", bookshelf);
 
-      this.updateStateWithShelfs(bookshelf);
+      this.updateStateWithShelfs(bookshelf, this.state.shelfs);
       console.log("App STATE", this.state);
       //this.moveBook(bookshelf);
     });
   }
 
-  updateStateWithShelfs = bookshelf => {
-    bookshelf[0].length > 0 &&
+  updateStateWithShelfs = (bookshelf, shelfs) => {
+    bookshelf.map(shelf => {
+      if (shelf.length > 0) {
+        console.log("DDDD", shelf.length);
+        console.log(shelf);
+        let stateprop = shelf[0].shelf;
+        this.setState({ [stateprop]: shelf }); 
+      }
+
+      // console.log(shelf.shortname);
+      // var result = bookshelf.some(shelf => shelf.shelf === shelf.shortname);
+      //var result = bookshelf.includes(shelf.shortname);
+
+      /*       bookshelf[0].length > 0 &&
       bookshelf.map(shelf => {
         let stateprop = shelf[0].shelf;
         this.setState({ [stateprop]: shelf });
       });
+ */
+    });
   };
 
   moveBook = readingshelfs => {
@@ -69,7 +83,6 @@ class BookShelf extends Component {
     });
   };
   render() {
-    const { readingShelfName } = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">

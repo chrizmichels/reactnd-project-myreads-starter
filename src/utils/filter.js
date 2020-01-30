@@ -1,12 +1,12 @@
 const filterShelf = (books, readingShelf) => {
   let returnShelfes = [];
+  let  bookshelf = [];
   for (const shelfname of readingShelf) {
     console.log(shelfname);
-
-    const bookshelf = filterBooks(books, shelfname);
+    bookshelf = filterBooks(books, shelfname);
     returnShelfes.push(bookshelf);
   }
-  //console.log("RETURN SHELFS", returnShelfes);
+  console.log("RETURN SHELFS", returnShelfes);
 
   return returnShelfes;
 };
@@ -15,11 +15,15 @@ const filterBooks = (books, shelfname) => {
   const bookshelf = [];
 
   for (const book of books) {
+    //console.log(shelfname.shortname, book.shelf);
     if (book.shelf === shelfname.shortname) {
       const objbook = createBook(book);
+      //console.log(objbook);
       bookshelf.push(objbook);
     }
   }
+  console.log("KKKK",bookshelf);
+
   return bookshelf;
 };
 
