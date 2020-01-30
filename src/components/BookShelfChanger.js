@@ -6,18 +6,20 @@ import "../App.css";
 class BookShelfChanger extends Component {
   constructor(props) {
     super(props);
+    this.state = { value: this.props.shelf };
     this.handleupdate = this.handleupdate.bind(this);
   }
 
   handleupdate(e) {
     this.props.onHandleUpdate(e.target.value);
+    this.setState({ value: e.target.value });
   }
   render() {
     const shelf = this.props.shelf;
-    
+
     return (
       <div className="book-shelf-changer">
-        <select onChange={this.handleupdate}>
+        <select value={this.state.value} onChange={this.handleupdate}>
           <option value="move" disabled>
             Move to...
           </option>
