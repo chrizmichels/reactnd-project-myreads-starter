@@ -1,12 +1,10 @@
 const filterShelf = (books, readingShelf) => {
   let returnShelfes = [];
-  let  bookshelf = [];
+  let bookshelf = [];
   for (const shelfname of readingShelf) {
-    console.log(shelfname);
     bookshelf = filterBooks(books, shelfname);
     returnShelfes.push(bookshelf);
   }
-  console.log("RETURN SHELFS", returnShelfes);
 
   return returnShelfes;
 };
@@ -22,7 +20,6 @@ const filterBooks = (books, shelfname) => {
       bookshelf.push(objbook);
     }
   }
-  console.log("KKKK",bookshelf);
 
   return bookshelf;
 };

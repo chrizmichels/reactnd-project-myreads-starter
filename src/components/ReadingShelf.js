@@ -5,12 +5,17 @@ import "../App.css";
 import { Books } from "./Books";
 
 export const ReadingShelf = props => {
-  const { books, shelfTitle, shelfShortName } = props;
+  const { books, shelf, onHandleUpdateShelf } = props;
 
   return (
     <div className="bookshelf">
-      <h2 className="bookshelf-title">{shelfTitle}</h2>
-      <Books books={books} shelf={shelfShortName} key={shelfShortName} />
+      <h2 className="bookshelf-title">{shelf.title}</h2>
+      <Books
+        books={books[shelf.shortname]}
+        shelf={[shelf.shortname]}
+        key={[shelf.shortname]}
+        onHandleUpdateShelf={onHandleUpdateShelf}
+      />
     </div>
   );
 };

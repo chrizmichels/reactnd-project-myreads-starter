@@ -5,7 +5,7 @@ import "../App.css";
 import Book from "./Book";
 
 export const Books = props => {
-  const { books } = props;
+  const { books, onHandleUpdateShelf } = props;
 
   return (
     <div className="bookshelf-books">
@@ -13,11 +13,8 @@ export const Books = props => {
         {books.map(book => (
           <Book
             key={book.id}
-            title={book.title}
-            author={book.authors}
-            bookurl={book.imageLinks}
-            id={book.id}
-            shelf={book.shelf}
+            book={book}
+            onHandleUpdateShelf={onHandleUpdateShelf}
           />
         ))}
       </ol>
