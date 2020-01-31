@@ -32,11 +32,15 @@ class SearchPage extends Component {
   };
 
   render() {
+    const { onHandleUpdateShelf } = this.props;
 
     return (
       <div>
         <SearchInput onHandleUpdateQuery={this.handleupdateQuery} />
-        <SearchResult state={this.state} />
+        <SearchResult
+          state={this.state}
+          onHandleUpdateShelf={onHandleUpdateShelf}
+        />
       </div>
     );
   }

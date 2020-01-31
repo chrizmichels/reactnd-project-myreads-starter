@@ -6,19 +6,34 @@ import "../App.css";
 class BookShelfChanger extends Component {
   constructor(props) {
     super(props);
-    // this.state = { value: this.props.shelf };
-    this.handleupdate = this.handleupdate.bind(this);
+/*     this.state = { value: props.shelf.shelf };
+    this.handleShelfChange = this.handleShelfChange.bind(this); */
   }
 
-  handleupdate(e) {
+/*   upDateState = shelf => {
+    this.setState({ value: "shelf" });
+    return this.state;
+  }; */
+
+  handleShelfChange = e => {
+    console.log("BOOKSHELFCHANGER - Target Value", e.target.value);
+  /*   console.log("BOOKSHELFCHANGER - STATE", this.state);
+    //this.setState({ value: e.target.value });
+    this.upDateState(e.target.value);
+    console.log("BOOKSHELFCHANGER - STATE", this.state); */
     this.props.onHandleUpdate(e.target.value);
-    // this.setState({ value: e.target.value });
-  }
+  };
+
   render() {
-    //this.state = { value: this.props.shelf };
+    //console.log("RENDER - Tile", this.props.shelf.title);
+    //console.log("RENDER", this.state);
+
     return (
       <div className="book-shelf-changer">
-        <select value={this.props.shelf} onChange={this.handleupdate}>
+        <select
+          value={this.props.shelf.shelf}
+          onChange={this.handleShelfChange}
+        >
           <option value="move" disabled>
             Move to...
           </option>

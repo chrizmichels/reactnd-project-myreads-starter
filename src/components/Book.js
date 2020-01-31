@@ -38,7 +38,7 @@ class Book extends Component {
             ></div>
             <BookShelfChanger
               onHandleUpdate={this.handleupdate}
-              shelf={book.shelf}
+              shelf={book}
             />
           </div>
           <div className="book-title">{book.title}</div>

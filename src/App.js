@@ -30,13 +30,9 @@ class BooksApp extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      //console.log(books);
       const bookshelf = filterShelf(books, this.state.shelfs);
-      //console.log("BOOKSHELF", bookshelf);
-
       this.updateStateWithShelfs(bookshelf, this.state.shelfs);
       console.log("App STATE", this.state);
-      //this.moveBook(bookshelf);
     });
   }
 
@@ -53,41 +49,46 @@ class BooksApp extends Component {
     console.log("CALLBACK", shelf);
     this.moveBook(shelf);
   };
-
+  moveBook = book => {
+    this.removeBook(book, this.state);
+    this.addbook(book, this.state);
+  };
   removeBook = (book, bookshelf) => {
     console.log(`REMOVE BOOK ${book.removefrom} ${bookshelf}`);
     console.log(bookshelf[book.removefrom]);
-    var removeIndex = bookshelf[book.removefrom]
-      .map(function(item) {
-        //console.log("Book", item);
-        return item.id;
-      })
-      .indexOf(book.book.id);
-    if (removeIndex >= 0) {
-      console.log("REMOVE Book at Index", removeIndex);
-      let array = [...bookshelf[book.removefrom]];
-      array.splice(removeIndex, 1);
-      //console.log("BOOK REMOVED", books);
-      this.setState({ [book.removefrom]: array });
+    /*    book !== "" &&
+      BooksAPI.update(book.book, book.removefrom).then(response => {
+        console.log("Books API RESPONSE", response);
+      }); */
+    if (book.removefrom !== undefined) {
+      var removeIndex = bookshelf[book.removefrom]
+        .map(function(item) {
+          return item.id;
+        })
+        .indexOf(book.book.id);
+      if (removeIndex >= 0) {
+        console.log("REMOVE Book at Index", removeIndex);
+        book.shelf = book.removefrom;
+        let array = [...bookshelf[book.removefrom]];
+        array.splice(removeIndex, 1);
+        this.setState({ [book.removefrom]: array });
+      }
     }
+    console.log(this.state[book.removefrom]);
   };
 
   addbook = (book, bookshelf) => {
     console.log("Add Book", book);
-    book.shelf = book.moveto;
-    let array = [...bookshelf[book.moveto]];
-
-    array.push(book.book);
-    this.setState({ [book.moveto]: array });
-  };
-
-  moveBook = book => {
     book !== "" &&
       BooksAPI.update(book.book, book.moveto).then(response => {
         console.log("Books API RESPONSE", response);
       });
-    this.removeBook(book, this.state);
-    this.addbook(book, this.state);
+    if (book.moveto !== "none") {
+      book.shelf = book.moveto;
+      let array = [...bookshelf[book.moveto]];
+      array.push(book.book);
+      this.setState({ [book.moveto]: array });
+    }
   };
 
   render() {
@@ -98,7 +99,7 @@ class BooksApp extends Component {
           path="/Search"
           render={() => (
             <div>
-              <SearchPage />
+              <SearchPage onHandleUpdateShelf={this.handleupdateshelf} />
             </div>
           )}
         />

@@ -7,7 +7,7 @@ import { filterBooksOnly } from "../utils/filter";
 
 class SearchResult extends Component {
   render() {
-    const { state } = this.props;
+    const { state, onHandleUpdateShelf } = this.props;
     const books = state.searchResult;
     //console.log(books);
 
@@ -15,7 +15,10 @@ class SearchResult extends Component {
       <div className="search-books-results">
         <ol className="books-grid">
           {books !== undefined && books.length > 0 && (
-            <Books books={filterBooksOnly(books)} />
+            <Books
+              books={filterBooksOnly(books)}
+              onHandleUpdateShelf={onHandleUpdateShelf}
+            />
           )}
         </ol>
       </div>
