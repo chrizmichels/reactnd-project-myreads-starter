@@ -10,7 +10,7 @@ class SearchPage extends Component {
     query: "",
     searchResult: []
   };
-
+  /* 
   searchBooks = query => {
     query === "" ||
       BooksAPI.search(query).then(books => {
@@ -26,21 +26,15 @@ class SearchPage extends Component {
       searchResult: this.searchBooks(query)
     }));
   };
-
-  clearQuery = () => {
-    this.updateQuery("");
-  };
+ */
 
   render() {
-    const { onHandleUpdateShelf } = this.props;
+    const { onHandleUpdateShelf, onHandleUpdateQuery, books } = this.props;
 
     return (
       <div>
-        <SearchInput onHandleUpdateQuery={this.handleupdateQuery} />
-        <SearchResult
-          state={this.state}
-          onHandleUpdateShelf={onHandleUpdateShelf}
-        />
+        <SearchInput onHandleUpdateQuery={onHandleUpdateQuery} />
+        <SearchResult books={books} onHandleUpdateShelf={onHandleUpdateShelf} />
       </div>
     );
   }

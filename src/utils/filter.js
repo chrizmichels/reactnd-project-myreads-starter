@@ -31,7 +31,7 @@ const createBook = book => {
     authors: book.authors,
     title: book.title,
     subtitle: book.subtitle,
-    imageLinks: book.imageLinks.thumbnail
+    imageLinks: book.imageLinks.smallThumbnail
   };
   return objbook;
 };

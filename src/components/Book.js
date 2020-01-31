@@ -36,13 +36,10 @@ class Book extends Component {
                 backgroundImage: `url(${book.imageLinks}?`
               }}
             ></div>
-            <BookShelfChanger
-              onHandleUpdate={this.handleupdate}
-              shelf={book}
-            />
+            <BookShelfChanger onHandleUpdate={this.handleupdate} shelf={book} />
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.author}</div>
+          <div className="book-authors">{book.authors}</div>
         </div>
       </li>
     );

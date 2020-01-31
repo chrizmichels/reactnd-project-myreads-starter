@@ -7,16 +7,16 @@ import { filterBooksOnly } from "../utils/filter";
 
 class SearchResult extends Component {
   render() {
-    const { state, onHandleUpdateShelf } = this.props;
-    const books = state.searchResult;
+    const { books, onHandleUpdateShelf } = this.props;
+    const booksearch = books.searchResult;
     //console.log(books);
 
     return (
       <div className="search-books-results">
         <ol className="books-grid">
-          {books !== undefined && books.length > 0 && (
+          {booksearch !== undefined && booksearch.length > 0 && (
             <Books
-              books={filterBooksOnly(books)}
+              books={booksearch}
               onHandleUpdateShelf={onHandleUpdateShelf}
             />
           )}

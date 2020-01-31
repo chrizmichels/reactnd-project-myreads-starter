@@ -4,7 +4,7 @@ import "./App.css";
 //import { bool } from "prop-types";
 import BookShelf from "./components/BookShelf";
 import { Route } from "react-router-dom";
-import { filterShelf } from "./utils/filter";
+import { filterShelf, filterBooks } from "./utils/filter";
 import SearchPage from "./components/SearchPage";
 
 class BooksApp extends Component {
@@ -12,6 +12,8 @@ class BooksApp extends Component {
     currentlyReading: [],
     wantToRead: [],
     read: [],
+    query: "",
+    searchResult: [],
     shelfs: [
       {
         title: "Currently Reading",
@@ -36,6 +38,29 @@ class BooksApp extends Component {
     });
   }
 
+  searchBooks = query => {
+    query === "" ||
+      BooksAPI.search(query).then(books => {
+        const searchBooks = filterBooks(books, "searchResult");
+        console.log(books);
+
+        this.setState(() => ({
+          searchResult: searchBooks
+        }));
+      });
+    console.log(this.state);
+  };
+
+  handleupdateQuery = query => {
+    console.log("CALLBACK", query);
+
+    this.setState(() => ({
+      query: query.trim(),
+      searchResult: this.searchBooks(query)
+    }));
+    console.log(this.state);
+  };
+
   updateStateWithShelfs = bookshelf => {
     bookshelf.map(shelf => {
       if (shelf.length > 0) {
@@ -56,10 +81,7 @@ class BooksApp extends Component {
   removeBook = (book, bookshelf) => {
     console.log(`REMOVE BOOK ${book.removefrom} ${bookshelf}`);
     console.log(bookshelf[book.removefrom]);
-    /*    book !== "" &&
-      BooksAPI.update(book.book, book.removefrom).then(response => {
-        console.log("Books API RESPONSE", response);
-      }); */
+
     if (book.removefrom !== undefined) {
       var removeIndex = bookshelf[book.removefrom]
         .map(function(item) {
@@ -68,13 +90,13 @@ class BooksApp extends Component {
         .indexOf(book.book.id);
       if (removeIndex >= 0) {
         console.log("REMOVE Book at Index", removeIndex);
-        book.shelf = book.removefrom;
         let array = [...bookshelf[book.removefrom]];
         array.splice(removeIndex, 1);
+        console.log("REMOVE Book at Index Array", array);
         this.setState({ [book.removefrom]: array });
       }
     }
-    console.log(this.state[book.removefrom]);
+    console.log(this.state);
   };
 
   addbook = (book, bookshelf) => {
@@ -86,12 +108,17 @@ class BooksApp extends Component {
     if (book.moveto !== "none") {
       book.shelf = book.moveto;
       let array = [...bookshelf[book.moveto]];
-      array.push(book.book);
+      console.log(array);
+      let bookcopy = book.book;
+      bookcopy.shelf = book.moveto;
+      array.push(bookcopy);
       this.setState({ [book.moveto]: array });
     }
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <div className="app">
         <Route
@@ -99,7 +126,11 @@ class BooksApp extends Component {
           path="/Search"
           render={() => (
             <div>
-              <SearchPage onHandleUpdateShelf={this.handleupdateshelf} />
+              <SearchPage
+                onHandleUpdateShelf={this.handleupdateshelf}
+                onHandleUpdateQuery={this.handleupdateQuery}
+                books={this.state}
+              />
             </div>
           )}
         />

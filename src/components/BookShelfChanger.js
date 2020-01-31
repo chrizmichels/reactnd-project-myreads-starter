@@ -6,28 +6,14 @@ import "../App.css";
 class BookShelfChanger extends Component {
   constructor(props) {
     super(props);
-/*     this.state = { value: props.shelf.shelf };
-    this.handleShelfChange = this.handleShelfChange.bind(this); */
   }
-
-/*   upDateState = shelf => {
-    this.setState({ value: "shelf" });
-    return this.state;
-  }; */
 
   handleShelfChange = e => {
     console.log("BOOKSHELFCHANGER - Target Value", e.target.value);
-  /*   console.log("BOOKSHELFCHANGER - STATE", this.state);
-    //this.setState({ value: e.target.value });
-    this.upDateState(e.target.value);
-    console.log("BOOKSHELFCHANGER - STATE", this.state); */
     this.props.onHandleUpdate(e.target.value);
   };
 
   render() {
-    //console.log("RENDER - Tile", this.props.shelf.title);
-    //console.log("RENDER", this.state);
-
     return (
       <div className="book-shelf-changer">
         <select
