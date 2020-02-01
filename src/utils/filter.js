@@ -25,9 +25,15 @@ const filterBooks = (books, shelfname) => {
 };
 
 const createBook = book => {
+  let shelfvalue = "";
+  if (book.shelf === undefined) {
+    shelfvalue = "none";
+  } else {
+    shelfvalue = book.shelf;
+  }
   const objbook = {
     id: book.id,
-    shelf: book.shelf,
+    shelf: shelfvalue,
     authors: book.authors,
     title: book.title,
     subtitle: book.subtitle,

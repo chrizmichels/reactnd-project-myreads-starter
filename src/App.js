@@ -38,27 +38,54 @@ class BooksApp extends Component {
     });
   }
 
+  updateSearchResultsShelfState = (stateObject, bookSearchResult) => {
+    let updateBook = {};
+    let updateBooks = [];
+    stateObject.shelfs.map(shelf => {
+      stateObject[shelf.shortname].map(book => {
+        var removeIndex = bookSearchResult
+          .map(function(item) {
+            return item.id;
+          })
+          .indexOf(book.id);
+
+        if (removeIndex >= 0) {
+          updateBook = {
+            removeIndex: removeIndex,
+            book: book
+          };
+          updateBooks.push(updateBook);
+        }
+      });
+    });
+
+    //Update Books in array
+    updateBooks.map(update => {
+      bookSearchResult.splice(update.removeIndex, 1, update.book);
+    });
+    return bookSearchResult;
+  };
+
   searchBooks = query => {
     query === "" ||
       BooksAPI.search(query).then(books => {
         const searchBooks = filterBooks(books, "searchResult");
-        console.log(books);
 
+        const updatedBooks = this.updateSearchResultsShelfState(
+          this.state,
+          searchBooks
+        );
         this.setState(() => ({
-          searchResult: searchBooks
+          searchResult: updatedBooks
         }));
       });
-    console.log(this.state);
   };
 
   handleupdateQuery = query => {
-    console.log("CALLBACK", query);
-
     this.setState(() => ({
       query: query.trim(),
       searchResult: this.searchBooks(query)
     }));
-    console.log(this.state);
   };
 
   updateStateWithShelfs = bookshelf => {
@@ -71,7 +98,6 @@ class BooksApp extends Component {
   };
 
   handleupdateshelf = shelf => {
-    console.log("CALLBACK", shelf);
     this.moveBook(shelf);
   };
   moveBook = book => {
@@ -79,36 +105,25 @@ class BooksApp extends Component {
     this.addbook(book, this.state);
   };
   removeBook = (book, bookshelf) => {
-    console.log(`REMOVE BOOK ${book.removefrom} ${bookshelf}`);
-    console.log(bookshelf[book.removefrom]);
-
-    if (book.removefrom !== undefined) {
+    if (book.removefrom !== "none") {
       var removeIndex = bookshelf[book.removefrom]
         .map(function(item) {
           return item.id;
         })
         .indexOf(book.book.id);
       if (removeIndex >= 0) {
-        console.log("REMOVE Book at Index", removeIndex);
         let array = [...bookshelf[book.removefrom]];
         array.splice(removeIndex, 1);
-        console.log("REMOVE Book at Index Array", array);
         this.setState({ [book.removefrom]: array });
       }
     }
-    console.log(this.state);
   };
 
   addbook = (book, bookshelf) => {
-    console.log("Add Book", book);
-    book !== "" &&
-      BooksAPI.update(book.book, book.moveto).then(response => {
-        console.log("Books API RESPONSE", response);
-      });
+    book !== "" && BooksAPI.update(book.book, book.moveto).then(response => {});
     if (book.moveto !== "none") {
       book.shelf = book.moveto;
       let array = [...bookshelf[book.moveto]];
-      console.log(array);
       let bookcopy = book.book;
       bookcopy.shelf = book.moveto;
       array.push(bookcopy);
