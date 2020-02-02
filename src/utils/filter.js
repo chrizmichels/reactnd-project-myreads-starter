@@ -33,17 +33,30 @@ const createBook = book => {
     shelfvalue = book.shelf;
   }
 
-  if (book.imageLinks !== undefined && book.authors !== undefined) {
-    const objbook = {
-      id: book.id,
-      shelf: shelfvalue,
-      authors: book.authors,
-      title: book.title,
-      subtitle: book.subtitle,
-      imageLinks: book.imageLinks.thumbnail
+  let imageLinks;
+  let authors;
+  if (book.imageLinks === undefined) {
+    imageLinks = {
+      thumbnail: "https://ik.imagekit.io/l94s44tab/content_dc2bL8qpU.png"
     };
-    return objbook;
+  } else {
+    imageLinks = book.imageLinks;
   }
+  if (book.authors === undefined) {
+    authors = [];
+  } else {
+    authors = book.authors;
+  }
+
+  const objbook = {
+    id: book.id,
+    shelf: shelfvalue,
+    authors: authors,
+    title: book.title,
+    subtitle: book.subtitle,
+    imageLinks: imageLinks.thumbnail
+  };
+  return objbook;
 };
 
 const filterBooksOnly = books => {
