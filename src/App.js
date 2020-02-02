@@ -59,8 +59,6 @@ class BooksApp extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     return (
       <div className="app">
         <Route
