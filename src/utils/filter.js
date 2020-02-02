@@ -17,7 +17,9 @@ const filterBooks = (books, shelfname) => {
     if (book.shelf === shelfname.shortname) {
       const objbook = createBook(book);
       //console.log(objbook);
-      bookshelf.push(objbook);
+      if (objbook !== undefined) {
+        bookshelf.push(objbook);
+      }
     }
   }
 
@@ -31,23 +33,24 @@ const createBook = book => {
   } else {
     shelfvalue = book.shelf;
   }
-  const objbook = {
-    id: book.id,
-    shelf: shelfvalue,
-    authors: book.authors,
-    title: book.title,
-    subtitle: book.subtitle,
-    imageLinks: book.imageLinks.smallThumbnail
-  };
-  return objbook;
+
+  if (book.imageLinks !== undefined && book.authors !== undefined) {
+    const objbook = {
+      id: book.id,
+      shelf: shelfvalue,
+      authors: book.authors,
+      title: book.title,
+      subtitle: book.subtitle,
+      imageLinks: book.imageLinks.thumbnail
+    };
+    return objbook;
+  }
 };
 
 const filterBooksOnly = books => {
   const bookshelf = [];
-  //console.log(books);
 
   for (const book of books) {
-    //console.log(book);
     if (book.imageLinks !== undefined) {
       bookshelf.push({
         id: book.id,

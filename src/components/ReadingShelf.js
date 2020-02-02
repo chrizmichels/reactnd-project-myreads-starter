@@ -1,7 +1,6 @@
 import React from "react";
-// import * as BooksAPI from './BooksAPI'
+import PropTypes from "prop-types";
 import "../App.css";
-//import { bool } from "prop-types";
 import { Books } from "./Books";
 
 export const ReadingShelf = props => {
@@ -20,4 +19,8 @@ export const ReadingShelf = props => {
   );
 };
 
-//export default ReadingShelf;
+ReadingShelf.propTypes = {
+  shelf: PropTypes.object,
+  books: PropTypes.object,
+  onHandleUpdateShelf: PropTypes.func
+};

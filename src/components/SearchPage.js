@@ -1,33 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "../App.css";
-import * as BooksAPI from "../utils/BooksAPI";
 import SearchInput from "./SearchInput";
 import SearchResult from "./SearchResult";
-//import { render } from "react-dom";
 
 class SearchPage extends Component {
-  state = {
-    query: "",
-    searchResult: []
-  };
-  /* 
-  searchBooks = query => {
-    query === "" ||
-      BooksAPI.search(query).then(books => {
-        this.setState(() => ({
-          searchResult: books
-        }));
-      });
-  };
-
-  handleupdateQuery = query => {
-    this.setState(() => ({
-      query: query.trim(),
-      searchResult: this.searchBooks(query)
-    }));
-  };
- */
-
   render() {
     const { onHandleUpdateShelf, onHandleUpdateQuery, books } = this.props;
 
@@ -39,5 +16,11 @@ class SearchPage extends Component {
     );
   }
 }
+
+SearchPage.propTypes = {
+  books: PropTypes.object,
+  onHandleUpdateQuery: PropTypes.func,
+  onHandleUpdateShelf: PropTypes.func
+};
 
 export default SearchPage;

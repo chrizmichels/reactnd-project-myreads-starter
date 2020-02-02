@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-// import * as BooksAPI from './BooksAPI'
+import PropTypes from "prop-types";
 import "../App.css";
-//import { bool } from "prop-types";
 import { Books } from "./Books";
-import { filterBooksOnly } from "../utils/filter";
 
 class SearchResult extends Component {
   render() {
     const { books, onHandleUpdateShelf } = this.props;
     const booksearch = books.searchResult;
-    //console.log(books);
 
     return (
       <div className="search-books-results">
@@ -25,5 +22,10 @@ class SearchResult extends Component {
     );
   }
 }
+
+SearchResult.propTypes = {
+  books: PropTypes.object,
+  onHandleUpdateShelf: PropTypes.func
+};
 
 export default SearchResult;

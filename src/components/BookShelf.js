@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import * as BooksAPI from "../utils/BooksAPI";
 import "../App.css";
-//import { bool } from "prop-types";
+import PropTypes from "prop-types";
 import { ReadingShelf } from "./ReadingShelf";
 import { Link } from "react-router-dom";
-import { filterShelf } from "../utils/filter";
 
 class BookShelf extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { shelfs, books, onHandleUpdateShelf } = this.props;
     return (
@@ -29,7 +23,7 @@ class BookShelf extends Component {
           ))}
         </div>
         <div className="open-search">
-          <Link to="Search">
+          <Link to="search">
             <button>Add a book</button>
           </Link>
         </div>
@@ -37,5 +31,11 @@ class BookShelf extends Component {
     );
   }
 }
+
+BookShelf.propTypes = {
+  shelfs: PropTypes.array,
+  books: PropTypes.object,
+  onHandleUpdateShelf: PropTypes.func
+};
 
 export default BookShelf;

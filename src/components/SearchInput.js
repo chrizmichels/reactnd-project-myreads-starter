@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import "../App.css";
-//import { bool } from "prop-types";
 import { Link } from "react-router-dom";
 
 class SearchInput extends Component {
@@ -11,14 +10,20 @@ class SearchInput extends Component {
   }
 
   handleupdateQuery(e) {
-    this.props.onHandleUpdateQuery(e.target.value);
+    e.type === "change"
+      ? this.props.onHandleUpdateQuery(e.target.value)
+      : this.props.onHandleUpdateQuery("");
   }
 
   render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" to="/">
+          <Link
+            className="close-search"
+            onClick={this.handleupdateQuery}
+            to="/"
+          >
             Close
           </Link>
           <div className="search-books-input-wrapper">
@@ -33,5 +38,9 @@ class SearchInput extends Component {
     );
   }
 }
+
+SearchInput.propTypes = {
+  onHandleUpdateQuery: PropTypes.func
+};
 
 export default SearchInput;

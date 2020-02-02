@@ -1,24 +1,21 @@
 import React, { Component } from "react";
-import * as BooksAPI from "../utils/BooksAPI";
+import PropTypes from "prop-types";
 import "../App.css";
-//import { bool } from "prop-types";
 import BookShelfChanger from "./BookShelfChanger";
-//import { render } from "react-dom";
 
 class Book extends Component {
-  constructor(props) {
-    super(props);
-    //this.props.onHandleUpdateShelf = this.props.onHandleUpdateShelf.bind(this);
-  }
-
   handleupdate = shelf => {
-    console.log("BOOKCHANGER", shelf);
-    console.log(this.props.book);
     this.props.onHandleUpdateShelf({
       moveto: shelf,
       removefrom: this.props.book.shelf,
       book: this.props.book
     });
+  };
+
+  lineBreakAuthors = authors => {
+    let authorsStr = authors.toString();
+    let resStr = authorsStr.split(",").join("\n");
+    return resStr;
   };
 
   render() {
@@ -39,11 +36,20 @@ class Book extends Component {
             <BookShelfChanger onHandleUpdate={this.handleupdate} shelf={book} />
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.authors}</div>
+          <div className="book-authors">
+            {book.authors.length === 1
+              ? book.authors
+              : this.lineBreakAuthors(book.authors)}
+          </div>
         </div>
       </li>
     );
   }
 }
+
+Book.propTypes = {
+  books: PropTypes.array,
+  onHandleUpdateShelf: PropTypes.func
+};
 
 export default Book;

@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-// import * as BooksAPI from './BooksAPI'
+import PropTypes from "prop-types";
 import "../App.css";
-//import { bool } from "prop-types";
 
 class BookShelfChanger extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleShelfChange = e => {
-    console.log("BOOKSHELFCHANGER - Target Value", e.target.value);
     this.props.onHandleUpdate(e.target.value);
   };
 
@@ -32,5 +26,10 @@ class BookShelfChanger extends Component {
     );
   }
 }
+
+BookShelfChanger.propTypes = {
+  onHandleUpdateShelf: PropTypes.func,
+  shelf: PropTypes.object
+};
 
 export default BookShelfChanger;

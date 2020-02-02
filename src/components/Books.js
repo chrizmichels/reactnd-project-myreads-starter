@@ -1,7 +1,6 @@
 import React from "react";
-// import * as BooksAPI from './BooksAPI'
+import PropTypes from "prop-types";
 import "../App.css";
-//import { bool } from "prop-types";
 import Book from "./Book";
 
 export const Books = props => {
@@ -22,4 +21,7 @@ export const Books = props => {
   );
 };
 
-//export default Books;
+Books.propTypes = {
+  books: PropTypes.array,
+  onHandleUpdateShelf: PropTypes.func
+};
