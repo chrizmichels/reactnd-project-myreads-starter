@@ -20,6 +20,6 @@ Give it a shot.
 
 and here you go.
 
-4. For details on the UDACITY Boiler Plate, check out [README-Template.md](CONTRIBUTING.md)
+4. For details on the UDACITY Boiler Plate, check out [original README](EADME-Template.md)
 
 5. have fun :octopus:
