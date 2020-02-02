@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as BooksAPI from "./utils/BooksAPI";
 import "./App.css";
-import BookShelf from "./components/BookShelf";
+import { BookShelf } from "./components/BookShelf";
 import { Route } from "react-router-dom";
 import { filterShelf } from "./utils/filter";
 import {
@@ -9,7 +9,7 @@ import {
   updateStateWithShelfs,
   searchBooks
 } from "./utils/BooksHandler";
-import SearchPage from "./components/SearchPage";
+import { SearchPage } from "./components/SearchPage";
 
 class BooksApp extends Component {
   state = {
@@ -59,6 +59,8 @@ class BooksApp extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <div className="app">
         <Route
