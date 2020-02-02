@@ -13,10 +13,9 @@ const filterBooks = (books, shelfname) => {
   const bookshelf = [];
 
   for (const book of books) {
-    //console.log(shelfname.shortname, book.shelf);
     if (book.shelf === shelfname.shortname) {
       const objbook = createBook(book);
-      //console.log(objbook);
+
       if (objbook !== undefined) {
         bookshelf.push(objbook);
       }
